@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head_title %} Restaurants|{{block.super}}{% endblock head_title %}
+
+{% block content %}
+<h1> Restaurant List </h1>
+<ul>
+{% for obj in object_list %}
+  <li><a href='/posts/{{ obj.slug }}/'> {{ obj }}</a> <br>
+    {{ obj.category }}, {{ obj.location }}, {{ obj.timestamp }}, {{ obj.updated|timesince }} ago <br>
+  </li>
+  {{ obj.text }}
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block comment_section %}
+{% endblock comment_section%}
