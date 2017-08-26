@@ -5,7 +5,7 @@ from .validators import validate_category
 
 class PostsCreateForm(forms.ModelForm):
     category = forms.CharField(validators=[validate_category])
-    email = forms.EmailField()
+    # email = forms.EmailField()
     class Meta:
         model = Posts
         fields = [

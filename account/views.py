@@ -1,8 +1,13 @@
-from django.shortcuts import render
-from django.views.generic import CreateView
-from account.forms import RegisterUserForm
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.http import HttpResponseForbidden, HttpResponse
+
+
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, TemplateView
+
+from account.forms import RegisterUserForm, LoginForm
 
 
 class RegisterUserView(CreateView):
@@ -21,4 +26,18 @@ class RegisterUserView(CreateView):
         user.save()
         return HttpResponse('User registered')
 
+
+class LoginUserView(LoginView):
+    form_class = LoginForm
+    template_name = "account/login.html"
+    redirect_authenticated_user = True
+    success_url = '//'
+
+
+@method_decorator(login_required, name='dispatch')
+class DashboardView(TemplateView):
+    template_name = 'account/dashboard.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(DashboardView, self).dispatch(request, *args, **kwargs)
 # Create your views here.

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'Posts',
-    'profiles',
+    'comment',
     'account',
 
 ]
